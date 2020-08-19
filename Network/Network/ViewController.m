@@ -10,9 +10,9 @@
 #import "BFNetwork.h"
 
 //// 基本地址
-static NSString *const http_base_server = @"http://livenew.ofweek.com";
+static NSString *const http_base_server = @"";
 //// 文件上传基本地址
-static NSString *const http_file_server = @"http://liveadmin.ofweek.com";
+static NSString *const http_file_server = @"";
 
 @interface ViewController ()
 
@@ -26,21 +26,43 @@ static NSString *const http_file_server = @"http://liveadmin.ofweek.com";
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self testForm];
-    [self testGet];
-    [self testPost];
+    //[self testForm];
+    //[self testGet];
+    //[self testPost];
 }
 
 - (void)testGet {
-    
+     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+     BFNetworkRequest *request = [[BFNetworkRequest alloc]init];
+     request.serverURL = @"http://www.weather.com.cn/data/sk/101010100.html";
+     request.methodName = @"";
+     request.requestType = GET;
+     request.params = dict;
+     [[BFNetwork shareNetwork] sendRequest:request success:^(id  _Nonnull responseObject) {
+         NSLog(@"%@", responseObject);
+     } failure:^(NSString * _Nonnull error) {
+         NSLog(@"%@", error);
+     }];
 }
 
 - (void)testPost {
-    
+     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+     [dict setValue:@"" forKey:@"account"];
+     [dict setValue:@"123456" forKey:@"password"];
+     BFNetworkRequest *request = [[BFNetworkRequest alloc]init];
+     request.serverURL = http_base_server;
+     request.methodName = @"/login/memberlogin";
+     request.requestType = POST;
+     request.params = dict;
+     [[BFNetwork shareNetwork] sendRequest:request success:^(id  _Nonnull responseObject) {
+         NSLog(@"%@", responseObject);
+     } failure:^(NSString * _Nonnull error) {
+         NSLog(@"%@", error);
+     }];
 }
 
 - (void)testForm {
-    NSData *data =  UIImageJPEGRepresentation([UIImage imageNamed:@"live_graphic_del"], 1.0);
+    NSData *data = UIImageJPEGRepresentation([UIImage imageNamed:@"live_graphic_del"], 1.0);
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:@"0" forKey:@"filetype"];
     [dict setValue:data forKey:@"file"];
