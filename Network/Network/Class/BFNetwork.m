@@ -8,7 +8,6 @@
 
 #import "BFNetwork.h"
 
-
 NSString *const ResponseErrorKey = @"com.alamofire.serialization.response.error.response";
 #define Kboundary  @"----WebKitFormBoundaryjh7urS5p3OcvqXAT"
 #define KNewLine [@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]
@@ -236,7 +235,7 @@ static BFNetwork *_instance = nil;
             //file 文件参数 参数名 == username
             //filename 文件上传到服务器之后以什么名称来保存
             NSString *fileName = [NSString stringWithFormat:@"%@.png", key];
-            NSString *content = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"",key, fileName];
+            NSString *content = [NSString stringWithFormat:@"Content-Disposition: form-data; name=%@; filename=%@",key, fileName];
             [data appendData:[content dataUsingEncoding:NSUTF8StringEncoding]];
             [data appendData:KNewLine];
             
@@ -259,7 +258,7 @@ static BFNetwork *_instance = nil;
             [data appendData:[[NSString stringWithFormat:@"--%@",Kboundary] dataUsingEncoding:NSUTF8StringEncoding]];
             [data appendData:KNewLine];
             //username 参数名称
-            NSString *keyContent = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"",key];
+            NSString *keyContent = [NSString stringWithFormat:@"Content-Disposition: form-data; name=%@",key];
             NSString *content = [NSString stringWithFormat:@"%@",obj];
             [data appendData:[keyContent dataUsingEncoding:NSUTF8StringEncoding]];
             [data appendData:KNewLine];
