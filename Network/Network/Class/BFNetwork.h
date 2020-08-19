@@ -7,25 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BFNetworkRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^SuccessBlock)(id responseObject);
-typedef void (^FailureBlock)(NSString *error);
-
+typedef void (^BFSuccessBlock)(id responseObject);
+typedef void (^BFFailureBlock)(NSString *error);
 
 @interface BFNetwork : NSObject
 
-//原生GET网络请求
-+ (void)getWithURL:(NSString *)url
-            params:(NSDictionary *)params
-           success:(SuccessBlock)success
-           failure:(FailureBlock)failure;
++ (instancetype)shareNetwork;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
-+ (void)postWithURL:(NSString *)url
-             params:(NSDictionary *)params
-            success:(SuccessBlock)success
-            failure:(FailureBlock)failure;
+- (NSURLSessionTask *)sendRequest:(BFNetworkRequest *)request
+                          success:(nullable BFSuccessBlock)success
+                          failure:(nullable BFFailureBlock)failure;
 
 @end
 

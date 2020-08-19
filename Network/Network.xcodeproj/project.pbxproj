@@ -16,6 +16,7 @@
 		5EDF9EDB236A73D40038127E /* NetworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDF9EDA236A73D40038127E /* NetworkTests.m */; };
 		5EDF9EE6236A73D40038127E /* NetworkUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDF9EE5236A73D40038127E /* NetworkUITests.m */; };
 		5EDF9EF6236A74150038127E /* BFNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDF9EF5236A74150038127E /* BFNetwork.m */; };
+		A002ADEB24ECFA79007F8207 /* BFNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A002ADEA24ECFA79007F8207 /* BFNetworkRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		5EDF9EE7236A73D40038127E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EDF9EF4236A74150038127E /* BFNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFNetwork.h; sourceTree = "<group>"; };
 		5EDF9EF5236A74150038127E /* BFNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFNetwork.m; sourceTree = "<group>"; };
+		A002ADE924ECFA79007F8207 /* BFNetworkRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFNetworkRequest.h; sourceTree = "<group>"; };
+		A002ADEA24ECFA79007F8207 /* BFNetworkRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFNetworkRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,8 @@
 			children = (
 				5EDF9EF4236A74150038127E /* BFNetwork.h */,
 				5EDF9EF5236A74150038127E /* BFNetwork.m */,
+				A002ADE924ECFA79007F8207 /* BFNetworkRequest.h */,
+				A002ADEA24ECFA79007F8207 /* BFNetworkRequest.m */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				5EDF9EC6236A73D10038127E /* ViewController.m in Sources */,
 				5EDF9EC0236A73D10038127E /* AppDelegate.m in Sources */,
 				5EDF9ED1236A73D30038127E /* main.m in Sources */,
+				A002ADEB24ECFA79007F8207 /* BFNetworkRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
