@@ -87,18 +87,25 @@ static BFNetwork *_instance = nil;
             if (data) {
                 //利用iOS自带原生JSON解析data数据 保存为Dictionary
                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                success(dict);
+                if(success) {
+                    success(dict);
+                }
                 
             } else {
                 
                 NSHTTPURLResponse *httpResponse = error.userInfo[ResponseErrorKey];
                 if (httpResponse.statusCode != 0) {
                     NSString *ResponseStr = [self showErrorInfoWithStatusCode:httpResponse.statusCode];
-                    failure(ResponseStr);
+                    if (failure) {
+                        failure(ResponseStr);
+                    }
+                    
                     
                 } else {
                     NSString *ErrorCode = [self showErrorInfoWithStatusCode:error.code];
-                    failure(ErrorCode);
+                    if (failure) {
+                        failure(ErrorCode);
+                    }
                 }
             }
         });
@@ -143,17 +150,23 @@ static BFNetwork *_instance = nil;
         if (data) {
             //利用iOS自带原生JSON解析data数据 保存为Dictionary
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            success(dict);
+            if (success) {
+                success(dict);
+            }
             
         } else {
             NSHTTPURLResponse *httpResponse = error.userInfo[ResponseErrorKey];
             if (httpResponse.statusCode != 0) {
                 NSString *ResponseStr = [self showErrorInfoWithStatusCode:httpResponse.statusCode];
-                failure(ResponseStr);
+                if (failure) {
+                    failure(ResponseStr);
+                }
                 
             } else {
                 NSString *ErrorCode = [self showErrorInfoWithStatusCode:error.code];
-                failure(ErrorCode);
+                if (failure) {
+                    failure(ErrorCode);
+                }
             }
         }
     }];
@@ -199,17 +212,23 @@ static BFNetwork *_instance = nil;
         if (data) {
             //利用iOS自带原生JSON解析data数据 保存为Dictionary
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            success(dict);
+            if (success) {
+                success(dict);
+            }
             
         } else {
             NSHTTPURLResponse *httpResponse = error.userInfo[ResponseErrorKey];
             if (httpResponse.statusCode != 0) {
                 NSString *ResponseStr = [self showErrorInfoWithStatusCode:httpResponse.statusCode];
-                failure(ResponseStr);
+                if (failure) {
+                    failure(ResponseStr);
+                }
                 
             } else {
                 NSString *ErrorCode = [self showErrorInfoWithStatusCode:error.code];
-                failure(ErrorCode);
+                if (failure) {
+                    failure(ErrorCode);
+                }
             }
         }
     }];
