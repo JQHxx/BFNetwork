@@ -119,18 +119,23 @@ static BFNetwork *_instance = nil;
     NSString *body = [self dealWithParam:request.params];
     NSData *bodyData = [body dataUsingEncoding:NSUTF8StringEncoding];
     
-    //设置请求体
-    [mRequest setHTTPBody:bodyData];
-    //设置本次请求的数据请求格式
-    //[mRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    // 设置本次请求请求体的长度(因为服务器会根据你这个设定的长度去解析你的请求体中的参数内容)
-    [mRequest setValue:[NSString stringWithFormat:@"%ld", bodyData.length] forHTTPHeaderField:@"Content-Length"];
     [request.header enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSString *_Nonnull obj, BOOL * _Nonnull stop) {
         [mRequest setValue:obj forHTTPHeaderField:key];
     }];
     if (request.isPostJson) {
         [mRequest setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:request.params options:NSJSONWritingPrettyPrinted error:&error];
+        NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+        bodyData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     }
+    
+    //设置本次请求的数据请求格式
+    //[mRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    // 设置本次请求请求体的长度(因为服务器会根据你这个设定的长度去解析你的请求体中的参数内容)
+    [mRequest setValue:[NSString stringWithFormat:@"%ld", bodyData.length] forHTTPHeaderField:@"Content-Length"];
+    //设置请求体
+    [mRequest setHTTPBody:bodyData];
     //设置请求最长时间
     mRequest.timeoutInterval = request.timeout;
     NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:mRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {

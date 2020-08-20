@@ -29,36 +29,56 @@ static NSString *const http_file_server = @"";
     //[self testForm];
     //[self testGet];
     //[self testPost];
+    //[self testPostJson];
 }
 
 - (void)testGet {
-     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-     BFNetworkRequest *request = [[BFNetworkRequest alloc]init];
-     request.serverURL = @"http://www.weather.com.cn/data/sk/101010100.html";
-     request.methodName = @"";
-     request.requestType = GET;
-     request.params = dict;
-     [[BFNetwork shareNetwork] sendRequest:request success:^(id  _Nonnull responseObject) {
-         NSLog(@"%@", responseObject);
-     } failure:^(NSString * _Nonnull error) {
-         NSLog(@"%@", error);
-     }];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    BFNetworkRequest *request = [[BFNetworkRequest alloc]init];
+    request.serverURL = @"http://www.weather.com.cn/data/sk/101010100.html";
+    request.methodName = @"";
+    request.requestType = GET;
+    request.params = dict;
+    [[BFNetwork shareNetwork] sendRequest:request success:^(id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)testPost {
-     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-     [dict setValue:@"" forKey:@"account"];
-     [dict setValue:@"123456" forKey:@"password"];
-     BFNetworkRequest *request = [[BFNetworkRequest alloc]init];
-     request.serverURL = http_base_server;
-     request.methodName = @"/login/memberlogin";
-     request.requestType = POST;
-     request.params = dict;
-     [[BFNetwork shareNetwork] sendRequest:request success:^(id  _Nonnull responseObject) {
-         NSLog(@"%@", responseObject);
-     } failure:^(NSString * _Nonnull error) {
-         NSLog(@"%@", error);
-     }];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:@"" forKey:@"account"];
+    [dict setValue:@"123456" forKey:@"password"];
+    BFNetworkRequest *request = [[BFNetworkRequest alloc]init];
+    request.serverURL = http_base_server;
+    request.methodName = @"/login/memberlogin";
+    request.requestType = POST;
+    request.params = dict;
+    [[BFNetwork shareNetwork] sendRequest:request success:^(id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)testPostJson {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:@"0" forKey:@"isWap"];
+    [dict setValue:@"59" forKey:@"roomId"];
+    [dict setValue:@"" forKey:@"msgId"];
+    [dict setValue:@(20) forKey:@"size"];
+    BFNetworkRequest *request = [[BFNetworkRequest alloc]init];
+    request.serverURL = http_base_server;
+    request.methodName = @"/group/getmoremsg";
+    request.requestType = POST;
+    request.params = dict;
+    request.isPostJson = YES;
+    [[BFNetwork shareNetwork] sendRequest:request success:^(id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)testForm {
